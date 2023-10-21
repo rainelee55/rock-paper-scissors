@@ -11,7 +11,7 @@ function playerSelection() {
   while (!isValid) {
   playerChoice = prompt("Choose rock, paper or scissors");
   if (playerChoice === 'rock' || playerChoice === 'paper' || playerChoice === 'scissors') {
-    isValid = true;w
+    isValid = true;
     return playerChoice;
   }
   else {
