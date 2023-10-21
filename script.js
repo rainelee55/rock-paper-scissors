@@ -4,21 +4,35 @@ function getComputerChoice() {
   return choice[random];
 }
 
-function playerSelection() {
-  let isValid = false;
-  let playerChoice;
+let playerScore = 0;
+let computerScore = 0;
 
-  while (!isValid) {
-  playerChoice = prompt("Choose rock, paper or scissors");
-  if (playerChoice === 'rock' || playerChoice === 'paper' || playerChoice === 'scissors') {
-    isValid = true;
-    return playerChoice;
-  }
-  else {
-    alert("Please input either rock, paper, or scissors.")
-  }
-}
-}
+let result_text = document.querySelector(".result");
+let playerScore_text = document.querySelector(".player-score");
+let computerScore_text = document.querySelector(".computer-score");
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const playerSelection = button.id;
+    console.log(playRound(playerSelection, computerSelection()));
+
+    let result = playRound(playerSelection, computerSelection());
+    result_text.textContent = result;
+
+    if (result.includes("win")) {
+      playerScore++;
+    }
+    else if (result.includes("lose")) {
+      computerScore++;
+    }
+
+    playerScore_text.textContent = "Player: " + playerScore;
+    computerScore_text.textContent = "Computer: " + computerScore;
+  })
+})
+
 
 function computerSelection() {
   const computerChoice = getComputerChoice();
@@ -54,26 +68,16 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  let draw = 0;
-  for (let index = 0; index < 5; index++) {
-    const playerChoice = playerSelection();
-    const computerChoice = computerSelection();
-    const result = playRound(playerChoice, computerChoice);
-    console.log(result);
+function counter() {
     if (result.includes("win")) {
       playerScore++;
     } else if (result.includes("lose")) {
       computerScore++;
-    } else {
-      draw++;
     }
   }
   console.log("Your wins: " + playerScore)
   console.log("Your losses: " + computerScore)
   console.log("Your ties: " + playerScore)
-}
 
-game();
+
+
